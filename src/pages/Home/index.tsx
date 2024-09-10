@@ -22,7 +22,7 @@ export default function Home() {
             const pokemonList = res.data.results;
             
             const detailedPokemons = await Promise.all(
-                pokemonList.map(async (pokemon: { name: string; url: string }) => {
+                pokemonList.map(async (pokemon: { id: number, name: string; url: string }) => {
                     const details = await axios.get(pokemon.url);
                     return {
                         id: details.data.id,
@@ -42,7 +42,7 @@ export default function Home() {
             <Main>
                 {
                     pokemons.map(pokemon => (
-                        <Card key={pokemon.id} text={pokemon.name} image={pokemon.image}/>
+                        <Card id={pokemon.id} key={pokemon.id} text={pokemon.name} image={pokemon.image} />
                     ))
                 }
             </Main>
